@@ -2,8 +2,7 @@
 layout: default
 title: About
 ---
-About meh.
-
+## ArkAngels' Profile
 * ## Who?
   My nickname is ArkAngels. For some reasons sorry I can't tell you my real name.
 * ## Why here?
