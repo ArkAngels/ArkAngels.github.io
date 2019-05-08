@@ -1,4 +1,6 @@
 title: ArkAngels' Writeups
-description: ArkAngels' blog for Writeups - CTF and Vulnhub
 show_downloads: false
+markdown: kramdown
 theme: jekyll-theme-hacker
+github:
+  is_project_page: false
