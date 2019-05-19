@@ -3,12 +3,13 @@ layout: default
 title: [Harekaze CTF 2019 - Encode and Encode]
 ---
 
+<h1 align="center">[Harekaze CTF 2019 - Encode and Encode]</h1>
 ## Challenge Descripton:
-<img src="https://blog.xarkangels.com/ctf/assets/harekaze2019_encode/challdesc.png" align="center">
+<img src="https://blog.xarkangels.com/ctf/assets/harekaze2019_encode/challdesc.png" align="center"><br>
 We are given a web and the source code (for source code you can find it in <a href="https://github.com/ArkAngels/CTF-Source-Codes/tree/master/Harekaze%20CTF%202019%20-%20Encode%20and%20Encode">link</a>).
-<img src="https://blog.xarkangels.com/ctf/assets/harekaze_encode/index.png" align="center">
-<img src="https://blog.xarkangels.com/ctf/assets/harekaze_encode/about.png" align="center">
-<img src="https://blog.xarkangels.com/ctf/assets/harekaze_encode/lorem.png" align="center">
+<img src="https://blog.xarkangels.com/ctf/assets/harekaze_encode/index.png" align="center"><br>
+<img src="https://blog.xarkangels.com/ctf/assets/harekaze_encode/about.png" align="center"><br>
+<img src="https://blog.xarkangels.com/ctf/assets/harekaze_encode/lorem.png" align="center"><br>
 
 From here, there are 3 pages that we can access; about, lorem, and source code of the <b>query.php</b>. Let's take a look at <b>query.php</b> first:
 ```php
