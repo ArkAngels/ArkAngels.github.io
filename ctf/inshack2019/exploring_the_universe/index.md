@@ -33,7 +33,7 @@ But what if we try to modify a file in <i>nano</i> and then without saving it we
 Then we force close the terminal and reopen it.<br>
 <img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/emergencyfile_nano.png"><br>
 
-It creates a so-called <i>emergency file</i> to save your progress called <b><filename>.save</b>.<br>
+It creates a so-called <i>emergency file</i> to save your progress called <b>\<filename\>.save</b>.<br>
 
 Next, if we try to write something in <i>vim</i> and save the file properly, it will create the file we want.<br>
 <img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_vim.png"><br>
@@ -44,7 +44,7 @@ But what is we write something and then force close the terminal? Here's what ha
 <img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/modify_vim.png"><br>
 <img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/tempfile_vim.png"><br>
 
-It creates a temporary file called <b>.<filename>.swp</b>. <i>Note: There is a dot (.) in front of the filename since it is a hidden file.<i><br>
+It creates a temporary file called <b>.\<filename\>.swp</b>. <i>Note: There is a dot (.) in front of the filename since it is a hidden file.<i><br>
 
 <i>Note: The writer found out recently that if you write something in nano and force close the nano with CTRL + Z it creates the same temporary file as vim.</i><br>
 
@@ -167,4 +167,23 @@ async def stream_file(request, filepath):
 <b>CMIIW</b>
 This part of code tells us that the root path will be concatenated with "public" and then with our path input. From this part, we can assume that maybe we can do a <i>path traversal</i> attack.<br>
 
-The writer then tried to debug the code in the local machine since we now have the source code. Remember that the flag is located
+The writer then tried to debug the code in the local machine since we now have the source code. Remember that the flag is located in <i>universe/flag</i>. So, in order to get to the flag we need to get back one directory to the root, and then access the universe directory then flag. But if we tried to do it casually it happens like this.<br>
+<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/test_input.png"><br>
+<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/got_404.png"><br>
+
+We got a 404 error. Let's see what the server received.<br>
+<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug.png"><br>
+
+We can see that the server removed the "../". Then how can we access the flag? There are 2 ways:
+* Use URL Encode on "/"
+* Use cURL option --path-as-is
+
+In this writeup, we will use the first option. By converting "/" into url encoded form "%2F" we can technically access the <i>universe/flag</i>.<br>
+<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag"><br>
+<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag_terminal"><br>
+
+And by implementing this method to the challenge link it will download the flag file.<br>
+<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/flag_download"><br>
+
+And voila! FLAG!<br>
+Flag: INSA{3e508f6e93fb2b6de561d5277f2a9b26bc79c5f349c467a91dd12769232c1a29}
