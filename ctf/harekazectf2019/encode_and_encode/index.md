@@ -1,6 +1,6 @@
 ---
 layout: default
-title: [Harekaze CTF 2019 - Encode and Encode]
+title: Harekaze CTF 2019 - Encode and Encode
 ---
 
 <h1 align="center">[Harekaze CTF 2019 - Encode and Encode]</h1>
