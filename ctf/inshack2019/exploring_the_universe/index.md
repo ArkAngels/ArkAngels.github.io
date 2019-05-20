@@ -12,37 +12,37 @@ URL: http://exploring-the-universe.ctf.insecurity-insa.fr/
 ```
 
 We are given a web page with the flag located in <i>universe/flag</i>.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/index.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/index.png"></p><br>
 
 Hmm, it looks like the page contains a game, nothing special. Let's take a look at the page source.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/page_source.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/page_source.png"></p><br>
 
 Nothing special either, just a game written in <b>Javascript</b>. What sorcery is this? xD<br>
 Let's get back to the challenge description. It says that the guy who wrote the challenge used a certain kind of text editor. At this point, the writer couldn't determine whether it's <i>nano</i> or <i>vim</i>. But it gave us the idea that we should look for something related to these 2 text editors and the file <b>server.py</b>. At first, the writer tried to access <b>server.py</b> but failed and got into 404 (not found) error page.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/404.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/404.png"></p><br>
 
 So, first thing first, when we write anything using <i>nano</i> or <i>vim</i>, we can also save the file with whatever extension we want. That is, if you save the file properly.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_nano.png"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/write_nano.png"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/save_nano.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_nano.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/write_nano.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/save_nano.png"></p><br>
 
 But what if we try to modify a file in <i>nano</i> and then without saving it we force close the terminal? This is what happened.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_nano.png"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/modify_nano.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_nano.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/modify_nano.png"></p><br>
 
 Then we force close the terminal and reopen it.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/emergencyfile_nano.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/emergencyfile_nano.png"></p><br>
 
 It creates a so-called <i>emergency file</i> to save your progress called <b>\<filename\>.save</b>.<br>
 
 Next, if we try to write something in <i>vim</i> and save the file properly, it will create the file we want.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_vim.png"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/write_vim.png"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/save_vim.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_vim.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/write_vim.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/save_vim.png"></p><br>
 
 But what is we write something and then force close the terminal? Here's what happens.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/modify_vim.png"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/tempfile_vim.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/modify_vim.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/tempfile_vim.png"></p><br>
 
 It creates a temporary file called <b>.\<filename\>.swp</b>. <i>Note: There is a dot (.) in front of the filename since it is a hidden file.<i><br>
 
@@ -53,7 +53,7 @@ Since now we have these informations, perhaps this website has a temporary file 
 http://exploring-the-universe.ctf.insecurity-insa.fr/.server.py.swp
 ```
 And it downloads the source code.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/source_download.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/source_download.png"></p><br>
 
 Now let's take a look at the source code.<br>
 ```python
@@ -168,22 +168,22 @@ async def stream_file(request, filepath):
 This part of code tells us that the root path will be concatenated with "public" and then with our path input. From this part, we can assume that maybe we can do a <i>path traversal</i> attack.<br>
 
 The writer then tried to debug the code in the local machine since we now have the source code. Remember that the flag is located in <i>universe/flag</i>. So, in order to get to the flag we need to get back one directory to the root, and then access the universe directory then flag. But if we tried to do it casually it happens like this.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/test_input.png"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/got_404.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/test_input.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/got_404.png"></p><br>
 
 We got a 404 error. Let's see what the server received.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug.png"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug.png"></p><br>
 
 We can see that the server removed the "../". Then how can we access the flag? There are 2 ways:
 * Use URL Encode on "/"
 * Use cURL option --path-as-is
 
 In this writeup, we will use the first option. By converting "/" into url encoded form "%2F" we can technically access the <i>universe/flag</i>.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag"><br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag_terminal"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag_terminal"></p><br>
 
 And by implementing this method to the challenge link it will download the flag file.<br>
-<img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/flag_download"><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/flag_download"></p><br>
 
 And voila! FLAG!<br>
 Flag: INSA{3e508f6e93fb2b6de561d5277f2a9b26bc79c5f349c467a91dd12769232c1a29}
