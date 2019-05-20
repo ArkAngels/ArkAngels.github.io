@@ -23,7 +23,6 @@ Let's get back to the challenge description. It says that the guy who wrote the 
 So, first thing first, when we write anything using <i>nano</i> or <i>vim</i>, we can also save the file with whatever extension we want. That is, if you save the file properly.<br>
 <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_nano.png"></p><br>
 <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/write_nano.png"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/save_nano.png"></p><br>
 
 But what if we try to modify a file in <i>nano</i> and then without saving it we force close the terminal? This is what happened.<br>
 <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/open_nano.png"></p><br>
