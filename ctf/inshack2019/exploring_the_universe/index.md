@@ -8,7 +8,6 @@ title: INS'hAck 2019 - Exploring the Universe
 ```
 Will you be able to find the flag in the universe/? I've been told that the guy who wrote this nice application called server.py is a huge fan of nano (yeah... he knows vim is better).<br>
 URL: [http://exploring-the-universe.ctf.insecurity-insa.fr/](http://exploring-the-universe.ctf.insecurity-insa.fr/)
-<br>
 ```
 
 We are given a web page with the flag located in <i>universe/flag</i>.<br>
