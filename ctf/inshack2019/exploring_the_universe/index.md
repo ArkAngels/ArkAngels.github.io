@@ -179,11 +179,11 @@ We can see that the server removed the "../". Then how can we access the flag? T
 * Use cURL option --path-as-is
 
 In this writeup, we will use the first option. By converting "/" into url encoded form "%2F" we can technically access the <i>universe/flag</i>.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag_terminal"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag.png"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/debug_flag_terminal.png"></p><br>
 
 And by implementing this method to the challenge link it will download the flag file.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/flag_download"></p><br>
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/inshack2019_explore/flag_download.png"></p><br>
 
 And voila! FLAG!<br>
 Flag: INSA{3e508f6e93fb2b6de561d5277f2a9b26bc79c5f349c467a91dd12769232c1a29}
