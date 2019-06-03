@@ -42,8 +42,8 @@ foreach ($products as $product) {
 <?php require_once("footer.php");
 ```
 ```php
-<?php
 // db.php
+<?php
 /*
 CREATE TABLE products (
   name char(64),
