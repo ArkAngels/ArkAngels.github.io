@@ -95,5 +95,5 @@ while flag[-1]!='}':
 			break
 ```
 And after some time, we get the flag.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/flag.png"></p><br>
+<!-- <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/flag.png"></p><br> -->
 Flag: hsctf{h0w_d3d_y3u_de3cryP4_th3_s1p3R_s3cuR3_m355a9e?}
