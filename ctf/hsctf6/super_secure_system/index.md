@@ -20,7 +20,7 @@ It will encrypt our input with a random unknown key. And if we are being idle fo
 But notice that the input itself, when we input a character the encrypted string will become 2 characters. And the encrypted message is 106 characters long. So we can conclue that the flag is 106/2 which is 53 characters. At first the writer tried to bruteforce per character to meet the requirement, but it seems that the writer was wrong. Refer to the following image:<br>
 <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/fuzzing.png"></p><br>
 
-When we input "hs", and then we input "s", the encrypted string of "s" is different from when we input "hs". From this point, after a discussion with my teammates, we come into a conclusion that we have to bruteforce the flag. Since it has time out it will be difficult to bruteforce manually. So, I make a python script to bruteforce the flag. Since the writer don't have any experience in using <i>pwntools</i> AT ALL, the original solution script was so damn shit. But thanks to the writer's teammate <b>cipung</b> he helped simplified the code. Here is the solution scripts.<br>
+When we input "hs", and then we input "s", the encrypted string of "s" is different from when we input "hs". From this point, after a discussion with my teammates, we come into a conclusion that we have to bruteforce the flag. Since it has time out it will be difficult to bruteforce manually. So, I make a python script to bruteforce the flag. Since the writer don't have any experience in using <i>pwntools</i> AT ALL, the original solution script was so damn shit. But thanks to the writer's teammate <b>cipung</b> he helped simplified the code. Here are the solution scripts.<br>
 
 ```python
 # Original Solution

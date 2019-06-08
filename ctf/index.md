@@ -12,3 +12,5 @@ Enjoy!<br>
 [INS'hAck 2019 - Exploring the Universe](https://blog.xarkangels.com/ctf/inshack2019/exploring_the_universe/)<br>
 [Harekaze CTF 2019 - Encode and Encode](https://blog.xarkangels.com/ctf/harekazectf2019/encode_and_encode/)<br>
 [Facebook CTF 2019 - Product Manager](https://blog.xarkangels.com/ctf/facebookctf2019/product_manager/)<br>
+[HSCTF6 - Super Secure System](https://blog.xarkangels.com/ctf/hsctf6/super_secure_system/)<br>
+[HSCTF6 - Networked Password](https://blog.xarkangels.com/ctf/hsctf6/networked_password/)<br>
