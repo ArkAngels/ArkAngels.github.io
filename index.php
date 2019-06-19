@@ -9,7 +9,8 @@
   <body>
     <div id="loading">ArkAngels</div>
   </body>
-  <?php
-    header("Location: https://blog.xarkangels.com/index.md");
-  ?>
+
 </html>
+<?php
+  header("Location: https://blog.xarkangels.com/index.md");
+?>
