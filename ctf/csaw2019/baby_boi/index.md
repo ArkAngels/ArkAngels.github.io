@@ -16,6 +16,7 @@ It looks that the binary's configurations are as the following:<br>
 * No Canary found: Canary in stack is used to detect stack smashing. When you do a stack smashing, the canary address will change because of that, and if the program detects a difference in the canary, the program will be terminated. In this case because there is no canary means we don't have to leak the canary address in order to do stack smashing.
 * NX Enabled: NX itself stands for *Non-Executable*. This configuration means that every segment in the memory is not writable **AND** executable. If this configuration is enabled, we can't execute a code that comes from outsite (like if we write a shellcode).
 * No PIE: PIE stands for Position Independent Executable. This configuration tells us that those addresses will change everytime we execute the ELF. But since the PIE is disabled, almost all addresses are static.
+
 Let's try to run the program first.<br>
 <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/csaw2019_baby_boi/test_run.png"></p><br>
 It seems the program prints an address before we input something, but what address is it?<br>
@@ -39,4 +40,5 @@ So, if the program only does that, how are we gonna get the flag? Remember, we a
 * Binary
 * C Source code
 * Libc library
+
 Using this libc library, we can spawn shell (/bin/sh) using the method *ret2libc*. 
