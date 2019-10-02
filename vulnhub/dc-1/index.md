@@ -44,29 +44,29 @@ After a few minutes of googling, the writer found a bug that was in Drupal 7, ca
 
 Well, according to the picture, it has the exploit in the Metasploit Framework. Perhaps we can use it to make our work easier. Let's fire up the Metasploit!
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/msfconsole.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/msfconsole.png"></p>
 
 If you already have the exploit name, you can just use <b>search \<a name related to the exploit\></b> to find the exploit, choose, and then type <b>use \<path to exploit module\></b>.
 
 After that, we have to set the parameters. To see what parameters we need just type <b>show options</b>.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/msf_options.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/msf_options.png"></p>
 
 Remember that the mandatory parameters will be tagged with <b>yes</b> at the <i>required</i> part. After we set all the parameters we need, we just have to type <b>exploit</b> to begin the process.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/meterpreter.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/meterpreter.png"></p>
 
 Yep when the exploit executed successfully, it will open a meterpreter session. In here, we haven't get any shell yet. But maybe we can do something with this meterpreter? Let's see what options do we have.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/meterpreter2.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/meterpreter2.png"></p>
 
 It seems we have the <b>shell</b> command that can be used to spawn shell.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/shell.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/shell.png"></p>
 
 Okay, now we have shell but only as <b>www-data</b>. It's okay, we will do something about it later. For now, let's explore the server for a bit.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/first_flag.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/first_flag.png"></p>
 
 Oh it seems we just got our first flag from this directory.
 
@@ -77,11 +77,11 @@ Every good CMS needs a config file - and so do you
 
 Okay, judging from the flag, we now have another clue. This clue refers to a config file owned by Drupal 7. The config file location for Drupal 7 can be found in <i>sites/default/</i>
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/getting_second_flag.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/getting_second_flag.png"></p>
 
 There are <b>settings.php</b> and <b>default.settings.php</b>. Since we need don't need the default one because Drupal will <b>ALWAYS</b> look for <b>settings.php</b>, we can just open the file and see what's inside.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/second_flag.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/second_flag.png"></p>
 
 There goes our second flag.
 
@@ -92,7 +92,7 @@ Brute force and dictionary attacks aren't the only ways to gain access (and you 
 
 Okay from the second flag we got, it seems we have to look into the database. And luckily we can get the MySQL login below the second flag.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_password.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_password.png"></p>
 
 ```
 Database -> drupaldb
@@ -106,14 +106,14 @@ Now we can login to MySQL for some more exploring.
 $ mysql -u dbuser -p R0ck3t
 ```
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql.png"></p>
 
 After we logged in, we can find the list of tables inside <i>drupaldb</i> database.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables.png"></p>
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables2.png"></p>
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables3.png"></p>
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables4.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables2.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables3.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/mysql_tables4.png"></p>
 
 Okay, there are lots of tables there. But knowing from the last clue, we can have a look at the <b>users</b> table.
 
@@ -121,9 +121,9 @@ Okay, there are lots of tables there. But knowing from the last clue, we can hav
 mysql> SELECT * FROM users;
 ```
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/dump_user_table.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/dump_user_table.png"></p>
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/admin_hash.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/admin_hash.png"></p>
 
 Yep, we got the hash for admin password. From here, there are two ways we can get the next flag:
 * Use hashcat + rockyou.txt to crack the password.
@@ -131,7 +131,7 @@ Yep, we got the hash for admin password. From here, there are two ways we can ge
 
 Since the writer's laptop is shit, we decided to use the second method. It took around almost 30 minutes to explore the tables from the top. And finally we got the third flag from <b>search_dataset</b> table.
 
-<p align="center" ><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/third_flag.png"></p>
+<p align="center"><img src="https://blog.xarkangels.com/vulnhub/assets/dc-1/third_flag.png"></p>
 
 ```
 Third flag:
