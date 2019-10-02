@@ -41,4 +41,10 @@ So, if the program only does that, how are we gonna get the flag? Remember, we a
 * C Source code
 * Libc library
 
-Using this libc library, we can spawn shell (/bin/sh) using the method *ret2libc*. 
+Using this libc library, we can spawn shell (/bin/sh) using the method *ret2libc*. Because this is 64-bit, there are few things we need to do this method:
+* libc base address
+* system offset in libc
+* /bin/sh offset in libc
+* pop rdi gadget
+
+Now I will explain why we need these:
