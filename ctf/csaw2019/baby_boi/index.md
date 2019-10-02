@@ -38,5 +38,5 @@ The program is quite straightforward actually. It will print the address of **pr
 So, if the program only does that, how are we gonna get the flag? Remember, we are given 3 files:<br>
 * Binary
 * C Source code
-* Libc library
+* Libc library<br>
 Using this libc library, we can spawn shell (/bin/sh) using the method *ret2libc*. 
