@@ -12,4 +12,7 @@ But for now, let's try to check the file.<br>
 <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/csaw2019_baby_boi/checksec.png"></p><br>
 It looks that the binary's configurations are as the following:<br>
 * The binary is 64-bit and not stripped.
-* Partial RELRO: RELRO is Relocation Read-Only. This configuration means that the *Global Offset Table* (GOT) and *Procedure Linkage Table* (PLT) is not in *read-only* mode
+* Partial RELRO: RELRO is Relocation Read-Only. This configuration means that the *Global Offset Table* (GOT) and *Procedure Linkage Table* (PLT) is not in *read-only* mode.
+* No Canary found: Canary in stack is used to detect stack smashing. When you do a stack smashing, the canary address will change because of that, and if the program detects a difference in the canary, the program will be terminated. In this case because there is no canary means we don't have to leak the canary address in order to do stack smashing.
+* NX Enabled: NX itself stands for *Non-Executable*. This configuration means that every segment in the memory is not writable **AND** executable. If this configuration is enabled, we can't execute a code that comes from outsite (like if we write a shellcode).
+* No PIE: PIE stands for Position Independent Executable. This configuration tells us that those addresses will change everytime we execute the ELF. But since the PIE is disabled, almost all addresses are static.
