@@ -18,12 +18,12 @@ It looks that the binary's configurations are as the following:<br>
 * No PIE: PIE stands for Position Independent Executable. This configuration tells us that those addresses will change everytime we execute the ELF. But since the PIE is disabled, almost all addresses are static.
 Let's try to run the program first.<br>
 <p align="center"><img src="https://blog.xarkangels.com/ctf/assets/csaw2019_baby_boi/test_run.png"></p><br>
-It seems the program prints an address after we input something, but what address is it?<br>
+It seems the program prints an address before we input something, but what address is it?<br>
 The disassembler gives us the main function like this:<br>
 ```C
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
-  char v4; // [sp+10h] [bp-20h]@1
+  char v4; // [sp+10h] [bp-20h]@1 // Array size -> 32 (0x20)
 
   setvbuf(_bss_start, 0LL, 2, 0LL);
   setvbuf(stdin, 0LL, 2, 0LL);
@@ -34,3 +34,9 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   return 0;
 }
 ```
+The program is quite straightforward actually. It will print the address of **printf** and it will ask us for input and then the program exits.<br>
+So, if the program only does that, how are we gonna get the flag? Remember, we are given 3 files:<br>
+* Binary
+* C Source code
+* Libc library
+Using this libc library, we can spawn shell (/bin/sh) using the method *ret2libc*. 
