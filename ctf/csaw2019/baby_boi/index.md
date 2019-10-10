@@ -49,14 +49,9 @@ Using this libc library, we can spawn shell (/bin/sh) using the method *ret2libc
 * ret gadget
 
 Now I will explain why we need these:
-* libc base address
-  Libc base address is needed so we can calculate the offset of system function and also /bin/sh steing in the libc.
-* system offset in libc
-  So we can call **system** function from libc
-* /bin/sh offset in libc
-  So we can give the **system** function an argument
-* pop rdi gadget
-  To point the argument of **system** function to /bin/sh
-* ret gadget
-  Exit gadget
+* libc base address: Libc base address is needed so we can calculate the offset of system function and also /bin/sh steing in the libc.
+* system offset in libc: So we can call **system** function from libc
+* /bin/sh offset in libc: So we can give the **system** function an argument
+* pop rdi gadget: To point the argument of **system** function to /bin/sh
+* ret gadget: Exit gadget
 
