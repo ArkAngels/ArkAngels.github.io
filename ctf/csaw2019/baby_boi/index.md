@@ -35,7 +35,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   return 0;
 }
 ```
-The program is quite straightforward actually. It will print the address of **printf** and it will ask us for input and then the program exits.<br>
+The program is quite straightforward actually. It will print the address of **printf** and it will ask us for input and then the program exits. And there is one thing that we need to highlight, the use of **gets** here is dangerous because the syntax has a vulnerability which is *buffer overflow*.<br>
 So, if the program only does that, how are we gonna get the flag? Remember, we are given 3 files:<br>
 * Binary
 * C Source code
@@ -46,5 +46,17 @@ Using this libc library, we can spawn shell (/bin/sh) using the method *ret2libc
 * system offset in libc
 * /bin/sh offset in libc
 * pop rdi gadget
+* ret gadget
 
 Now I will explain why we need these:
+* libc base address
+  Libc base address is needed so we can calculate the offset of system function and also /bin/sh steing in the libc.
+* system offset in libc
+  So we can call **system** function from libc
+* /bin/sh offset in libc
+  So we can give the **system** function an argument
+* pop rdi gadget
+  To point the argument of **system** function to /bin/sh
+* ret gadget
+  Exit gadget
+
