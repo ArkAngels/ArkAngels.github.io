@@ -6,17 +6,17 @@ title: Facebook CTF 2019 - Product Manager
 <h1 align="center">[Facebook CTF 2019 - Product Manager]</h1>
 
 ## Challenge Description:
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/challdesc.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/challdesc.png"></p><br>
 We are given a web with a source code. Let's take a look at the website first.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/home.png"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/add.png"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/view.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/home.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/add.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/view.png"></p><br>
 So in this website, we can add a product but in order to add something, we need to provide a <i>secret</i> which has to be 10 characters or more and alphanumeric. After we add a product, we can go to view and then we can view our product by submitting the product name and the secret. Let's start by adding a product.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/add_test.png"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/added.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/add_test.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/added.png"></p><br>
 And then let's try to view.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/view_test.png"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/viewed_test.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/view_test.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/viewed_test.png"></p><br>
 So, when we added a product, by submitting name and secret, we can get the product name and the description. Hmm... interesting. Since we are provided with the source code, let's take a look at it.<br>
 ```php
 // index.php
@@ -315,9 +315,9 @@ This function will try to get the product that we input and return it. Hang on, 
 The point of this attack this time is we can input something <b>different</b> but not quite different(?). From the PHP part, if we input "facebook\<space\>" it will be recognized as it is. But when it is being inserted to the database, MySQL somehow <i>trimmed</i> the space. So, from here, if we input "facebook\<space\>" and our own secret, in MySQL it will be "facebook" and \<my secret\>. So there will be 2 products named "facebook" but with 2 different secrets.<br>
 
 So from there, we can input something like this:
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/add_product.png"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/added.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/add_product.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/added.png"></p><br>
 From here, we can simply input "facebook" with our own secret to get the flag.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/get_flag.png"></p><br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/facebookctf2019_product/flag.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/get_flag.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/facebookctf2019_product/flag.png"></p><br>
 Flag: fb{4774ck1n9_5q1_w17h0u7_1nj3c710n_15_4m421n9_:)}

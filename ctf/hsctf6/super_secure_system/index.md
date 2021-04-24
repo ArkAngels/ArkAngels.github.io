@@ -6,19 +6,19 @@ title: HSCTF6 - Super Secure System
 <h1 align="center">[HSCTF6 - Super Secure System]</h1>
 
 ## Challenge Description:
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/challdesc.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/hsctf6_super_secure_system/challdesc.png"></p><br>
 
 We are given a network service:<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/nc.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/hsctf6_super_secure_system/nc.png"></p><br>
 
 The service itself is asking for input. For example if we input as on the following picture:
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/try.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/hsctf6_super_secure_system/try.png"></p><br>
 
 It will encrypt our input with a random unknown key. And if we are being idle for a certain time, it will become time out.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/timeout.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/hsctf6_super_secure_system/timeout.png"></p><br>
 
 But notice that the input itself, when we input a character the encrypted string will become 2 characters. And the encrypted message is 106 characters long. So we can conclue that the flag is 106/2 which is 53 characters. At first the writer tried to bruteforce per character to meet the requirement, but it seems that the writer was wrong. Refer to the following image:<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/fuzzing.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/hsctf6_super_secure_system/fuzzing.png"></p><br>
 
 When we input "hs", and then we input "s", the encrypted string of "s" is different from when we input "hs". From this point, after a discussion with my teammates, we come into a conclusion that we have to bruteforce the flag. Since it has time out it will be difficult to bruteforce manually. So, the writer made a python script to bruteforce the flag. Since the writer don't have any experience in using <i>pwntools</i> AT ALL, the original solution script was so damn shit. But thanks to the writer's teammate <b>cipung</b> he helped simplified the code. Here are the solution scripts.<br>
 
@@ -95,5 +95,5 @@ while flag[-1]!='}':
 			break
 ```
 And after some time, we get the flag.<br>
-<p align="center"><img src="https://blog.xarkangels.com/ctf/assets/hsctf6_super_secure_system/get_flag.png"></p><br>
+<p align="center"><img src="https://arkangels.github.io/ctf/assets/hsctf6_super_secure_system/get_flag.png"></p><br>
 Flag: hsctf{h0w_d3d_y3u_de3cryP4_th3_s1p3R_s3cuR3_m355a9e?}

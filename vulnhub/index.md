@@ -9,4 +9,4 @@ Here lies my collection of Vulnhub writeups. Some of these writeups are from loc
 <br>
 Enjoy!<br>
 
-[DC-1](https://blog.xarkangels.com/vulnhub/)
+[DC-1](https://arkangels.github.io/vulnhub/)
